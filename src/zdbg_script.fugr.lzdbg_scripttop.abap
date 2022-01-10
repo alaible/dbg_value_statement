@@ -10,7 +10,7 @@ INCLUDE lzdbg_scriptd08. "lcl_tree_base
 
 INCLUDE lzdbg_scriptd06. "lcl_match_cursor
 
-INCLUDE lzdbg_scriptd04. "lcl_screen_objects/lcx_screen_error
+*INCLUDE lzdbg_scriptd04. "lcl_screen_objects/lcx_screen_error
 
 INCLUDE lzdbg_scriptd09. "lcl_dd_handler
 

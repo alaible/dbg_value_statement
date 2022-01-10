@@ -24,7 +24,7 @@ START-OF-SELECTION.
   DATA(lv_where) = COND #( WHEN p_where IS INITIAL THEN '1 = 1' ELSE p_where ).
   TRY.
       SELECT FROM (p_tab)
-           FIELDS (p_flds)
+           FIELDS *
             WHERE (lv_where)
          ORDER BY (p_order)
        INTO TABLE @<res_tab>
