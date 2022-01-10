@@ -1,2 +1,2 @@
 # dbg_value_statement
-Debugger Script for value-statment creation
+Debugger Script for value-statement creation
