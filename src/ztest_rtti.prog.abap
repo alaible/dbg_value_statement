@@ -12,7 +12,7 @@ TYPES: BEGIN OF t_simple_struct,
          comp2    TYPE string,
          some_int TYPE i,
          obj      TYPE REF TO lcl_test_class,
-         obj2     TYPE REF TO zcl_test_class,
+*         obj2     TYPE REF TO zcl_test_class,
          int_ref  TYPE REF TO i,
        END OF t_simple_struct.
 
@@ -37,7 +37,7 @@ START-OF-SELECTION.
         lt_but000  TYPE TABLE OF but000,
         lt_scarr   TYPE TABLE OF t_scarr_splfi.
 **********************************************************************
-  ls_simple = VALUE #( comp1 = 'eins' comp2 = 'zwei' obj = NEW #( ) some_int = 5 int_ref = REF #( 5 ) obj2 = NEW #( ) ).
+  ls_simple = VALUE #( comp1 = 'eins' comp2 = 'zwei' obj = NEW #( ) some_int = 5 int_ref = REF #( 5 ) ).
   ls_nested = VALUE #( comp1 = 'outer_nested' nested = ls_simple ).
   lt_tab = VALUE #( ( |eins| ) ( |zwei| ) ).
   lt_simple = VALUE #( ( ls_simple ) ( ls_simple ) ).
