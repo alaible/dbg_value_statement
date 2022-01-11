@@ -37,7 +37,7 @@ CLASS ZCL_STRUCT_ENTITY IMPLEMENTATION.
 *** Target Refernces for Importing Reference and Component Reference
     DATA: lo_struct_descr TYPE REF TO cl_tpda_script_structdescr,
           lo_comp_descr   TYPE REF TO cl_tpda_script_data_descr.
-    FIELD-SYMBOLS: <mock_data> TYPE zcl_compl_entity=>tt_mock_data.
+*    FIELD-SYMBOLS: <mock_data> TYPE zcl_compl_entity=>tt_mock_data.
 **********************************************************************
 
 *** iv_is_root is handed through
@@ -57,7 +57,7 @@ CLASS ZCL_STRUCT_ENTITY IMPLEMENTATION.
 
 * Loop through all components of the structure and
     LOOP AT lt_components_full_it ASSIGNING FIELD-SYMBOL(<comp>).
-      <mock_data> = VALUE #( BASE <mock_data> ( comp_fullname = lt_components_it[ compname = <comp>-compname ]-longname ) ).
+*      <mock_data> = VALUE #( BASE <mock_data> ( comp_fullname = lt_components_it[ compname = <comp>-compname ]-longname ) ).
       ASSIGN <comp>-symbquick-quickdata TO FIELD-SYMBOL(<quick_data>).
       TRY.
           lr_symbsimple ?= <quick_data>.
