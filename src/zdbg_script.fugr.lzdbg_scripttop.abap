@@ -20,7 +20,7 @@ INCLUDE lzdbg_scriptd02. "lcl_screen_state
 
 INCLUDE lzdbg_scriptd05. "lcl_screen_objects_col
 
-INCLUDE lzdbg_scriptd01. "lcl_event_handler/lcl_alv_tree_objects
+*INCLUDE lzdbg_scriptd01. "lcl_event_handler/lcl_alv_tree_objects
 
 INCLUDE lzdbg_scripte01. "Included Selscreen
 

@@ -15,7 +15,7 @@ CLASS lcl_match_cursor DEFINITION.
     TYPES: t_cursor_info TYPE c LENGTH 30.
 **********************************************************************
     METHODS:
-      init_from_ref IMPORTING ir_ref TYPE REF TO zcl_entity=>tt_node_search CHANGING c_cursor_info TYPE t_cursor_info,
+      init_from_ref IMPORTING ir_ref TYPE REF TO zcl_value_entity=>tt_node_search CHANGING c_cursor_info TYPE t_cursor_info,
       set_empty_result CHANGING c_cursor_info TYPE t_cursor_info,
       reset_cursor_info CHANGING c_cursor_info TYPE t_cursor_info,
       go_down CHANGING c_cursor_info TYPE t_cursor_info,

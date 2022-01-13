@@ -6,11 +6,11 @@ CLASS ltc_test_data DEFINITION.
     CLASS-METHODS:
       class_constructor.
     CLASS-DATA:
-      node_tab_tmc           TYPE zcl_entity=>tt_node_table_tmc,
-      search_index_comp      TYPE zcl_entity=>tt_search_index,
-      search_index_cont_comp TYPE zcl_entity=>tt_search_index_cont,
-      node_tab_comp type treemcnota,
-      item_tab_comp type treemcitac.
+      node_tab_tmc           TYPE zcl_value_entity=>tt_node_table_tmc,
+      search_index_comp      TYPE zcl_value_entity=>tt_search_index,
+      search_index_cont_comp TYPE zcl_value_entity=>tt_search_index_cont,
+      node_tab_comp          TYPE treemcnota,
+      item_tab_comp          TYPE treemcitac.
 ENDCLASS.
 
 CLASS ltc_test_data IMPLEMENTATION.
@@ -191,7 +191,7 @@ CLASS ltc_test_data IMPLEMENTATION.
                       )
                     ).
 **********************************************************************
-    node_tab_comp  = value #(
+    node_tab_comp  = VALUE #(
                        (
                            node_key = `1`
                            relatkey = ``
@@ -321,427 +321,539 @@ CLASS ltc_test_data IMPLEMENTATION.
                            itemsincom = ''
                        )
                      ).
-    item_tab_comp  = value #(
-                      (
-                          node_key = `1`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `st_with_ref`
-                      )
-                      (
-                          node_key = `1`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `complex`
-                      )
-                      (
-                          node_key = `1`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `X`
-                      )
-                      (
-                          node_key = `2`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `outer`
-                      )
-                      (
-                          node_key = `2`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `simple`
-                      )
-                      (
-                          node_key = `2`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `outer`
-                      )
-                      (
-                          node_key = `2`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `3`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `nested`
-                      )
-                      (
-                          node_key = `3`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `complex`
-                      )
-                      (
-                          node_key = `3`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `X`
-                      )
-                      (
-                          node_key = `4`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `comp1`
-                      )
-                      (
-                          node_key = `4`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `simple`
-                      )
-                      (
-                          node_key = `4`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `one`
-                      )
-                      (
-                          node_key = `4`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `5`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `comp2`
-                      )
-                      (
-                          node_key = `5`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `simple`
-                      )
-                      (
-                          node_key = `5`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `two`
-                      )
-                      (
-                          node_key = `5`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `6`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `some_int`
-                      )
-                      (
-                          node_key = `6`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `simple`
-                      )
-                      (
-                          node_key = `6`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `5 `
-                      )
-                      (
-                          node_key = `6`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `7`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `obj`
-                      )
-                      (
-                          node_key = `7`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `reference`
-                      )
-                      (
-                          node_key = `7`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `7`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `X`
-                      )
-                      (
-                          node_key = `8`
-                          item_name = 'NODE_NAME'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `int_ref`
-                      )
-                      (
-                          node_key = `8`
-                          item_name = 'NODE_TYPE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `reference`
-                      )
-                      (
-                          node_key = `8`
-                          item_name = 'VALUE'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = ``
-                      )
-                      (
-                          node_key = `8`
-                          item_name = 'CONTAINS_REF'
-                          class = 2
-                          font = 0
-                          disabled = ''
-                          editable = ''
-                          hidden = ''
-                          t_image = ''
-                          chosen = ''
-                          style = 0
-                          txtisqinfo = ''
-                          text = `X`
-                      )
-                    ).
+    item_tab_comp   = VALUE #(
+                       (
+                           node_key = `1`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `st_with_ref`
+                       )
+                       (
+                           node_key = `1`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `complex`
+                       )
+                       (
+                           node_key = `1`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         1`
+                       )
+                       (
+                           node_key = `1`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `X`
+                       )
+                       (
+                           node_key = `2`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `outer`
+                       )
+                       (
+                           node_key = `2`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `simple`
+                       )
+                       (
+                           node_key = `2`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         2`
+                       )
+                       (
+                           node_key = `2`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `outer`
+                       )
+                       (
+                           node_key = `2`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `3`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `nested`
+                       )
+                       (
+                           node_key = `3`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `complex`
+                       )
+                       (
+                           node_key = `3`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         3`
+                       )
+                       (
+                           node_key = `3`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `X`
+                       )
+                       (
+                           node_key = `4`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `comp1`
+                       )
+                       (
+                           node_key = `4`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `simple`
+                       )
+                       (
+                           node_key = `4`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         4`
+                       )
+                       (
+                           node_key = `4`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `one`
+                       )
+                       (
+                           node_key = `4`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `5`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `comp2`
+                       )
+                       (
+                           node_key = `5`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `simple`
+                       )
+                       (
+                           node_key = `5`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         5`
+                       )
+                       (
+                           node_key = `5`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `two`
+                       )
+                       (
+                           node_key = `5`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `6`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `some_int`
+                       )
+                       (
+                           node_key = `6`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `simple`
+                       )
+                       (
+                           node_key = `6`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         6`
+                       )
+                       (
+                           node_key = `6`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `5 `
+                       )
+                       (
+                           node_key = `6`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `7`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `obj`
+                       )
+                       (
+                           node_key = `7`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `reference`
+                       )
+                       (
+                           node_key = `7`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         7`
+                       )
+                       (
+                           node_key = `7`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `7`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `X`
+                       )
+                       (
+                           node_key = `8`
+                           item_name = 'NODE_NAME'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `int_ref`
+                       )
+                       (
+                           node_key = `8`
+                           item_name = 'NODE_TYPE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `reference`
+                       )
+                       (
+                           node_key = `8`
+                           item_name = 'NODE_KEY'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `         8`
+                       )
+                       (
+                           node_key = `8`
+                           item_name = 'VALUE'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = ``
+                       )
+                       (
+                           node_key = `8`
+                           item_name = 'CONTAINS_REF'
+                           class = 2
+                           font = 0
+                           disabled = ''
+                           editable = ''
+                           hidden = ''
+                           t_image = ''
+                           chosen = ''
+                           style = 0
+                           txtisqinfo = ''
+                           text = `X`
+                       )
+                     ).
   ENDMETHOD.
 ENDCLASS.

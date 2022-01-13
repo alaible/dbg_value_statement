@@ -40,11 +40,11 @@ CLASS lcl_screen_objects_col DEFINITION INHERITING FROM lcl_screen_base FRIENDS 
       move_cursor_up CHANGING c_curs_info TYPE lcl_match_cursor=>t_cursor_info RAISING zcx_tree_err.
   PROTECTED SECTION.
 *    DATA: mo_alv_tree         TYPE REF TO cl_column_tree_model.
-    DATA: mr_node_table_tmc    TYPE REF TO zcl_entity=>tt_node_table_tmc,
-          mr_search_index      TYPE REF TO zcl_entity=>tt_search_index,
-          mr_search_index_cont TYPE REF TO zcl_entity=>tt_search_index_cont.
+    DATA: mr_node_table_tmc    TYPE REF TO zcl_value_entity=>tt_node_table_tmc,
+          mr_search_index      TYPE REF TO zcl_value_entity=>tt_search_index,
+          mr_search_index_cont TYPE REF TO zcl_value_entity=>tt_search_index_cont.
 **********************************************************************
-    DATA: mr_matches      TYPE REF TO zcl_entity=>tt_node_search,
+    DATA: mr_matches      TYPE REF TO zcl_value_entity=>tt_node_search,
           mr_curr_nodekey TYPE REF TO tm_nodekey.
     DATA: mo_match_cursor TYPE REF TO lcl_match_cursor,
           mo_screen_state TYPE REF TO lcl_screen_state,
@@ -61,7 +61,7 @@ CLASS lcl_screen_objects_col DEFINITION INHERITING FROM lcl_screen_base FRIENDS 
           mv_root_node_key   TYPE string,
           mv_filtered        TYPE abap_bool.
     DATA: mv_selected_node_key TYPE tm_nodekey,
-          mr_ref_node_table    TYPE REF TO zcl_entity=>tty_node_table.
+          mr_ref_node_table    TYPE REF TO zcl_value_entity=>tty_node_table.
 **********************************************************************
     METHODS:
       register_events REDEFINITION,
@@ -84,8 +84,8 @@ CLASS lcl_screen_objects_col DEFINITION INHERITING FROM lcl_screen_base FRIENDS 
       build_filtered_tree RAISING zcx_tree_err,
       find_all_parent_nodes
         IMPORTING
-          iv_node_key TYPE zcl_entity=>t_node_table_tmc-node_key
-          ir_matches  TYPE zcl_entity=>tr_node_search,
+          iv_node_key TYPE zcl_value_entity=>t_node_table_tmc-node_key
+          ir_matches  TYPE zcl_value_entity=>tr_node_search,
       expand_matches RAISING zcx_tree_err,
       set_styles_from_matches RAISING zcx_tree_err,
       highlight_ref_elements RAISING zcx_tree_err,
@@ -113,7 +113,7 @@ CLASS lcl_screen_objects_col DEFINITION INHERITING FROM lcl_screen_base FRIENDS 
 *** konstante für custom-container
     CLASS-DATA: lc_control_name TYPE string VALUE 'CUST_CONTROL'.
     CLASS-METHODS:
-      str_tab_as_flat_str IMPORTING it_str_tab TYPE zcl_entity=>tty_string RETURNING VALUE(rv_flatstring) TYPE string.
+      str_tab_as_flat_str IMPORTING it_str_tab TYPE zcl_value_entity=>tty_string RETURNING VALUE(rv_flatstring) TYPE string.
 ENDCLASS.
 
 
@@ -244,7 +244,7 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
 **********************************************************************
   ENDMETHOD.
   METHOD add_root_node_to_tree.
-    DATA: mr_message TYPE REF TO zcl_entity=>tty_string.
+    DATA: mr_message TYPE REF TO zcl_value_entity=>tty_string.
     me->init_tree_tables( ).
 **********************************************************************
     me->add_nodes( ).
@@ -326,11 +326,11 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
   METHOD find_all_parent_nodes.
-    DATA: lv_parent_node_key TYPE zcl_entity=>t_node_table_tmc-node_key.
-    FIELD-SYMBOLS: <node_table> TYPE zcl_entity=>tt_node_table_tmc,
-                   <node_entry> TYPE zcl_entity=>t_node_table_tmc.
-    FIELD-SYMBOLS: <matches> TYPE zcl_entity=>tt_node_search,
-                   <match>   TYPE zcl_entity=>t_node_search.
+    DATA: lv_parent_node_key TYPE zcl_value_entity=>t_node_table_tmc-node_key.
+    FIELD-SYMBOLS: <node_table> TYPE zcl_value_entity=>tt_node_table_tmc,
+                   <node_entry> TYPE zcl_value_entity=>t_node_table_tmc.
+    FIELD-SYMBOLS: <matches> TYPE zcl_value_entity=>tt_node_search,
+                   <match>   TYPE zcl_value_entity=>t_node_search.
 **********************************************************************
     ASSIGN me->mr_node_table_tmc->* TO <node_table>.
     ASSIGN ir_matches->* TO <matches>.
@@ -353,11 +353,11 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
 **********************************************************************
     DATA: lt_item_layout TYPE lvc_t_laci,
           lt_check_nodes TYPE TABLE OF tm_nodekey.
-    FIELD-SYMBOLS: <search_index>      TYPE zcl_entity=>tt_search_index,
-                   <search_index_cont> TYPE zcl_entity=>tt_search_index_cont,
-                   <node_tab_line>     TYPE zcl_entity=>t_node_table_tmc.
-    FIELD-SYMBOLS: <search_matches> TYPE zcl_entity=>tt_node_search,
-                   <match>          TYPE zcl_entity=>t_node_search.
+    FIELD-SYMBOLS: <search_index>      TYPE zcl_value_entity=>tt_search_index,
+                   <search_index_cont> TYPE zcl_value_entity=>tt_search_index_cont,
+                   <node_tab_line>     TYPE zcl_value_entity=>t_node_table_tmc.
+    FIELD-SYMBOLS: <search_matches> TYPE zcl_value_entity=>tt_node_search,
+                   <match>          TYPE zcl_value_entity=>t_node_search.
 **********************************************************************
 *** if tree was previously filtered via handle_file_search_fil,
 *** the tree is rebuilt so that all elements are added and therefore
@@ -405,11 +405,11 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     cl_gui_cfw=>flush( ).
   ENDMETHOD.
   METHOD handle_item_search_fil.
-    FIELD-SYMBOLS: <search_index>      TYPE zcl_entity=>tt_search_index,
-                   <search_index_cont> TYPE zcl_entity=>tt_search_index_cont,
-                   <node_tab_line>     TYPE zcl_entity=>t_node_table_tmc.
-    FIELD-SYMBOLS: <search_matches> TYPE zcl_entity=>tt_node_search,
-                   <match>          TYPE zcl_entity=>t_node_search.
+    FIELD-SYMBOLS: <search_index>      TYPE zcl_value_entity=>tt_search_index,
+                   <search_index_cont> TYPE zcl_value_entity=>tt_search_index_cont,
+                   <node_tab_line>     TYPE zcl_value_entity=>t_node_table_tmc.
+    FIELD-SYMBOLS: <search_matches> TYPE zcl_value_entity=>tt_node_search,
+                   <match>          TYPE zcl_value_entity=>t_node_search.
     DATA: lt_item_layout TYPE lvc_t_laci.
 **********************************************************************
     DATA: lt_check_nodes TYPE TABLE OF tm_nodekey.
@@ -472,10 +472,10 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     me->expand_matches( ).
   ENDMETHOD.
   METHOD perform_search.
-    FIELD-SYMBOLS: <search_index>      TYPE zcl_entity=>tt_search_index,
-                   <search_index_cont> TYPE zcl_entity=>tt_search_index_cont,
-                   <node_tab_line>     TYPE zcl_entity=>t_node_table_tmc.
-    FIELD-SYMBOLS: <search_matches> TYPE zcl_entity=>tt_node_search.
+    FIELD-SYMBOLS: <search_index>      TYPE zcl_value_entity=>tt_search_index,
+                   <search_index_cont> TYPE zcl_value_entity=>tt_search_index_cont,
+                   <node_tab_line>     TYPE zcl_value_entity=>t_node_table_tmc.
+    FIELD-SYMBOLS: <search_matches> TYPE zcl_value_entity=>tt_node_search.
 **********************************************************************
 *** Check for nkey search
     IF matches( val = iv_search_term regex = 'nkey=([[:digit:]]+)*' case = space ).
@@ -512,7 +512,7 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     ENDCASE.
   ENDMETHOD.
   METHOD perform_search_nk.
-    FIELD-SYMBOLS: <search_matches> TYPE zcl_entity=>tt_node_search.
+    FIELD-SYMBOLS: <search_matches> TYPE zcl_value_entity=>tt_node_search.
 **********************************************************************
     DATA(nkey) = replace( val = iv_search_term regex = 'nkey=' with = space case = space ).
     IF nkey IS NOT INITIAL
@@ -544,7 +544,7 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
   ENDMETHOD.
   METHOD reload_line_size.
     DATA: str_tab TYPE t_c_text,
-          info_t  TYPE zcl_entity=>tty_string.
+          info_t  TYPE zcl_value_entity=>tty_string.
 **********************************************************************
     "clear before reload text!
     mo_root_ent->clear_messages( ).
@@ -602,7 +602,7 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
   METHOD highlight_ref_elements.
-    FIELD-SYMBOLS: <node_tab_tmc> TYPE zcl_entity=>tt_node_table_tmc.
+    FIELD-SYMBOLS: <node_tab_tmc> TYPE zcl_value_entity=>tt_node_table_tmc.
     ASSIGN mr_node_table_tmc->* TO <node_tab_tmc>.
 **********************************************************************
     LOOP AT <node_tab_tmc> ASSIGNING FIELD-SYMBOL(<entry>) WHERE contains_ref EQ abap_true.
@@ -617,8 +617,8 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
   METHOD handle_item_double_click.
     DATA: lo_compl_ent TYPE REF TO zcl_compl_entity,
           lt_char_tab  TYPE t_c_text.
-    data: lt_message type zcl_entity=>tty_string.
-    FIELD-SYMBOLS: <node_el>    TYPE zcl_entity=>t_node_table_tmc.
+    data: lt_message type zcl_value_entity=>tty_string.
+    FIELD-SYMBOLS: <node_el>    TYPE zcl_value_entity=>t_node_table_tmc.
 **********************************************************************
     READ TABLE me->mr_node_table_tmc->* WITH KEY node_key = node_key ASSIGNING <node_el>.
 **********************************************************************
@@ -647,7 +647,7 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
   ENDMETHOD.
   METHOD find_all_child_elements.
     FIELD-SYMBOLS: <children> TYPE tt_nodekey,
-                   <node_tab> TYPE zcl_entity=>tt_node_table_tmc.
+                   <node_tab> TYPE zcl_value_entity=>tt_node_table_tmc.
     DATA: mv_node_key TYPE tm_nodekey.
     ASSIGN ir_child_nodes->* TO <children>.
     ASSIGN mr_node_table_tmc->* TO <node_tab>.
@@ -666,9 +666,9 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
   METHOD find_all_parent_elements.
-    DATA: lv_parent_node_key TYPE zcl_entity=>t_node_table_tmc-node_key.
-    FIELD-SYMBOLS: <node_table> TYPE zcl_entity=>tt_node_table_tmc,
-                   <node_entry> TYPE zcl_entity=>t_node_table_tmc.
+    DATA: lv_parent_node_key TYPE zcl_value_entity=>t_node_table_tmc-node_key.
+    FIELD-SYMBOLS: <node_table> TYPE zcl_value_entity=>tt_node_table_tmc,
+                   <node_entry> TYPE zcl_value_entity=>t_node_table_tmc.
     FIELD-SYMBOLS: <parent_nodes> TYPE tt_nodekey.
 **********************************************************************
     ASSIGN me->mr_node_table_tmc->* TO <node_table>.
@@ -795,8 +795,8 @@ CLASS lcl_screen_objects_col IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
   METHOD disable_child_elemnts.
-    FIELD-SYMBOLS: <node_table> TYPE zcl_entity=>tt_node_table_tmc,
-                   <node_entry> TYPE zcl_entity=>t_node_table_tmc.
+    FIELD-SYMBOLS: <node_table> TYPE zcl_value_entity=>tt_node_table_tmc,
+                   <node_entry> TYPE zcl_value_entity=>t_node_table_tmc.
     DATA: lo_node TYPE REF TO cl_salv_node.
 **********************************************************************
 *** Alle direkten Kind-Elemente (Zuordnung über Tabelle) inaktiv setzen

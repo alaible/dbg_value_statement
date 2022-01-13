@@ -8,7 +8,7 @@ CLASS ltc_test_values DEFINITION.
              class_name TYPE string,
            END OF t_nkey_classname.
     CLASS-METHODS: class_constructor.
-    CLASS-DATA: gt_node_tab_compare TYPE zcl_entity=>tt_node_table_tmc,
+    CLASS-DATA: gt_node_tab_compare TYPE zcl_value_entity=>tt_node_table_tmc,
                 gt_class_name_cast  TYPE SORTED TABLE OF t_nkey_classname WITH UNIQUE KEY nkey.
 ENDCLASS.
 
@@ -16,7 +16,7 @@ CLASS ltc_test_values IMPLEMENTATION.
   METHOD class_constructor.
 **********************************************************************
 *** gt_node_tab_compare
-    gt_node_tab_compare = VALUE zcl_entity=>tt_node_table_tmc(  (
+    gt_node_tab_compare = VALUE zcl_value_entity=>tt_node_table_tmc(  (
                                         node_key = '1'
                                         node_key_old = ''
 *                                        entity = REF_FOR::OBJ::{O:20*\CLASS=ZCL_TABLE_RTTI}

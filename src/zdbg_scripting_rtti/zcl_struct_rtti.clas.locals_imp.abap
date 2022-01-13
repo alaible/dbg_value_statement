@@ -13,7 +13,7 @@ CLASS ltc_test_values DEFINITION.
 **********************************************************************
     CLASS-METHODS:
       class_constructor.
-    CLASS-DATA: node_tab_tmc TYPE zcl_entity=>tt_node_table_tmc.
+    CLASS-DATA: node_tab_tmc TYPE zcl_value_entity=>tt_node_table_tmc.
 
 ENDCLASS.
 

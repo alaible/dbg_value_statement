@@ -283,9 +283,9 @@ CLASS ltc_table_rtti IMPLEMENTATION.
     ENDTRY.
   ENDMETHOD.
   METHOD test_simple_node_table.
-    DATA: lr_node_tab          TYPE REF TO zcl_entity=>tt_node_table_tmc,
-          lr_search_index      TYPE REF TO zcl_entity=>tt_search_index,
-          lr_search_index_cont TYPE REF TO zcl_entity=>tt_search_index_cont,
+    DATA: lr_node_tab          TYPE REF TO zcl_value_entity=>tt_node_table_tmc,
+          lr_search_index      TYPE REF TO zcl_value_entity=>tt_search_index,
+          lr_search_index_cont TYPE REF TO zcl_value_entity=>tt_search_index_cont,
           lr_node_key          TYPE REF TO tm_nodekey.
 **********************************************************************
     DATA: lr_nodetab_int TYPE REF TO treemcnota,

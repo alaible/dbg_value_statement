@@ -1,4 +1,4 @@
-CLASS zcl_compl_entity DEFINITION PUBLIC INHERITING FROM zcl_entity ABSTRACT.
+CLASS zcl_compl_entity DEFINITION PUBLIC INHERITING FROM zcl_value_entity ABSTRACT.
   PUBLIC SECTION.
     TYPES: BEGIN OF t_mock_data,
              comp_fullname TYPE string,
@@ -18,15 +18,15 @@ CLASS zcl_compl_entity DEFINITION PUBLIC INHERITING FROM zcl_entity ABSTRACT.
       build_node_table_fil REDEFINITION,
       collect_messages REDEFINITION,
       clear_messages REDEFINITION,
-      set_external_content IMPORTING it_cont TYPE zcl_entity=>tty_string,
+      set_external_content IMPORTING it_cont TYPE zcl_value_entity=>tty_string,
       get_alv_tree_key RETURNING VALUE(rv_key) TYPE string,
-      get_content_line_size IMPORTING i_line_size TYPE i DEFAULT 128 RETURNING VALUE(rt_content) TYPE zcl_entity=>tty_string.
+      get_content_line_size IMPORTING i_line_size TYPE i DEFAULT 128 RETURNING VALUE(rt_content) TYPE zcl_value_entity=>tty_string.
   PROTECTED SECTION.
-    DATA: mt_components TYPE TABLE OF REF TO zcl_entity,
+    DATA: mt_components TYPE TABLE OF REF TO zcl_value_entity,
           mv_is_root    TYPE abap_bool.
-    DATA: mt_external_content TYPE zcl_entity=>tty_string.
+    DATA: mt_external_content TYPE zcl_value_entity=>tty_string.
 
-    CLASS-METHODS: str_tab_as_flat_str IMPORTING it_str_tab TYPE zcl_entity=>tty_string RETURNING VALUE(rv_flatstring) TYPE string.
+    CLASS-METHODS: str_tab_as_flat_str IMPORTING it_str_tab TYPE zcl_value_entity=>tty_string RETURNING VALUE(rv_flatstring) TYPE string.
   PRIVATE SECTION.
 ENDCLASS.
 
@@ -40,8 +40,8 @@ CLASS ZCL_COMPL_ENTITY IMPLEMENTATION.
                    <itemtab_int>     TYPE treemcitac,
                    <current_nodekey> TYPE tm_nodekey.
     FIELD-SYMBOLS: <nodetab_tmc>       TYPE tt_node_table_tmc,
-                   <search_index>      TYPE zcl_entity=>tt_search_index,
-                   <search_index_cont> TYPE zcl_entity=>tt_search_index_cont.
+                   <search_index>      TYPE zcl_value_entity=>tt_search_index,
+                   <search_index_cont> TYPE zcl_value_entity=>tt_search_index_cont.
     DATA: lv_nkey_asint TYPE i.
 **********************************************************************
     ASSIGN ir_current_key->* TO <current_nodekey>.
@@ -127,8 +127,8 @@ CLASS ZCL_COMPL_ENTITY IMPLEMENTATION.
   METHOD build_node_table_fil.
     FIELD-SYMBOLS: <nodetab_int> TYPE treemcnota,
                    <itemtab_int> TYPE treemcitac.
-    FIELD-SYMBOLS: <match>      TYPE zcl_entity=>t_node_search,
-                   <node_table> TYPE zcl_entity=>tt_node_table_tmc.
+    FIELD-SYMBOLS: <match>      TYPE zcl_value_entity=>t_node_search,
+                   <node_table> TYPE zcl_value_entity=>tt_node_table_tmc.
 **********************************************************************
 *** Check if Node is relevant after filtering!
     READ TABLE ir_matches->* WITH KEY node_key = mv_alv_tree_node_tmc ASSIGNING <match>.
@@ -205,7 +205,7 @@ CLASS ZCL_COMPL_ENTITY IMPLEMENTATION.
 
 
   METHOD collect_messages.
-    FIELD-SYMBOLS: <messages> TYPE zcl_entity=>tty_string.
+    FIELD-SYMBOLS: <messages> TYPE zcl_value_entity=>tty_string.
     ASSIGN i_messages->* TO <messages>.
     <messages> = VALUE #( BASE <messages> FOR message IN mt_info_messages ( |Nkey: { mv_alv_tree_node_tmc } -- { message }| ) ).
     LOOP AT me->mt_components ASSIGNING FIELD-SYMBOL(<comp>).

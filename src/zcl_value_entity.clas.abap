@@ -1,12 +1,12 @@
 "! Abstract Base-Class for all Entity-Types
-CLASS zcl_entity DEFINITION PUBLIC ABSTRACT.
+CLASS zcl_value_entity DEFINITION PUBLIC ABSTRACT.
   PUBLIC SECTION.
     TYPES: tty_string TYPE TABLE OF string WITH EMPTY KEY.
     TYPES: ty_ref_strtab TYPE REF TO tty_string.
     TYPES: BEGIN OF ty_node_table,
              node_key        TYPE salv_de_node_key,
              node_key_old    TYPE salv_de_node_key,
-             entity          TYPE REF TO zcl_entity,
+             entity          TYPE REF TO zcl_value_entity,
              parent_node_key TYPE salv_de_node_key,
              contains_ref    TYPE abap_bool,
              disabled        TYPE abap_bool,
@@ -18,7 +18,7 @@ CLASS zcl_entity DEFINITION PUBLIC ABSTRACT.
     TYPES: BEGIN OF t_node_table_tmc,
              node_key        TYPE tm_nodekey,
              node_key_old    TYPE tm_nodekey,
-             entity          TYPE REF TO zcl_entity,
+             entity          TYPE REF TO zcl_value_entity,
              parent_node_key TYPE tm_nodekey,
              contains_ref    TYPE abap_bool,
              disabled        TYPE abap_bool,
@@ -52,7 +52,7 @@ CLASS zcl_entity DEFINITION PUBLIC ABSTRACT.
     METHODS:
       "! Returning the Content (Including subnodes, if existent)
       "! @parameter rt_content | String-Table with Node-Content
-      get_content ABSTRACT IMPORTING i_max_line_length TYPE i DEFAULT 256 RETURNING VALUE(rt_content) TYPE zcl_entity=>tty_string,
+      get_content ABSTRACT IMPORTING i_max_line_length TYPE i DEFAULT 256 RETURNING VALUE(rt_content) TYPE zcl_value_entity=>tty_string,
       "! Returning a flag if reference Objects are contained (Including subnodes)
       "! @parameter rv_contains_ref | Flag, if reference is contained
       contains_reference ABSTRACT RETURNING VALUE(rv_contains_ref) TYPE abap_bool,
@@ -84,8 +84,8 @@ CLASS zcl_entity DEFINITION PUBLIC ABSTRACT.
       build_node_table_fil ABSTRACT IMPORTING ir_node_tab   TYPE REF TO treemcnota
                                               ir_item_tab   TYPE REF TO treemcitac
                                               ir_node_table TYPE REF TO tt_node_table_tmc
-                                              ir_matches    TYPE REF TO zcl_entity=>tt_node_search,
-      collect_messages ABSTRACT IMPORTING i_messages TYPE REF TO zcl_entity=>tty_string.
+                                              ir_matches    TYPE REF TO zcl_value_entity=>tt_node_search,
+      collect_messages ABSTRACT IMPORTING i_messages TYPE REF TO zcl_value_entity=>tty_string.
 *** instance methods:
     METHODS:
       clear_messages,
@@ -108,11 +108,12 @@ CLASS zcl_entity DEFINITION PUBLIC ABSTRACT.
     METHODS:
       get_indention RETURNING VALUE(rv_ind) TYPE string,
       add_info_message IMPORTING i_message TYPE string.
+private section.
 ENDCLASS.
 
 
 
-CLASS ZCL_ENTITY IMPLEMENTATION.
+CLASS ZCL_VALUE_ENTITY IMPLEMENTATION.
 
 
   METHOD add_info_message.

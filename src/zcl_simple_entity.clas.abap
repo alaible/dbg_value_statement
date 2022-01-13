@@ -1,4 +1,4 @@
-CLASS zcl_simple_entity DEFINITION PUBLIC INHERITING FROM zcl_entity ABSTRACT CREATE PUBLIC.
+CLASS zcl_simple_entity DEFINITION PUBLIC INHERITING FROM zcl_value_entity ABSTRACT CREATE PUBLIC.
   PUBLIC SECTION.
     METHODS:
       constructor IMPORTING iv_typekind TYPE c iv_indent TYPE i,
@@ -14,9 +14,10 @@ CLASS zcl_simple_entity DEFINITION PUBLIC INHERITING FROM zcl_entity ABSTRACT CR
         IMPORTING i_left TYPE string DEFAULT space
                   i_plus_left_offset type i DEFAULT 0
                   i_max_line_size TYPE i
-        RETURNING VALUE(r_payload) TYPE zcl_entity=>tty_string.
+        RETURNING VALUE(r_payload) TYPE zcl_value_entity=>tty_string.
     DATA: mv_simple_value TYPE string,
           mv_type_kind    TYPE c.
+private section.
 ENDCLASS.
 
 
@@ -29,8 +30,8 @@ CLASS ZCL_SIMPLE_ENTITY IMPLEMENTATION.
                    <itemtab_int>     TYPE treemcitac,
                    <current_nodekey> TYPE tm_nodekey.
     FIELD-SYMBOLS: <nodetab_tmc>       TYPE tt_node_table_tmc,
-                   <search_index>      TYPE zcl_entity=>tt_search_index,
-                   <search_index_cont> TYPE zcl_entity=>tt_search_index_cont.
+                   <search_index>      TYPE zcl_value_entity=>tt_search_index,
+                   <search_index_cont> TYPE zcl_value_entity=>tt_search_index_cont.
     DATA: lv_nkey_asint TYPE i.
 **********************************************************************
     ASSIGN ir_current_key->* TO <current_nodekey>.
@@ -111,8 +112,8 @@ CLASS ZCL_SIMPLE_ENTITY IMPLEMENTATION.
   METHOD build_node_table_fil.
     FIELD-SYMBOLS: <nodetab_int> TYPE treemcnota,
                    <itemtab_int> TYPE treemcitac.
-    FIELD-SYMBOLS: <match>      TYPE zcl_entity=>t_node_search,
-                   <node_table> TYPE zcl_entity=>tt_node_table_tmc.
+    FIELD-SYMBOLS: <match>      TYPE zcl_value_entity=>t_node_search,
+                   <node_table> TYPE zcl_value_entity=>tt_node_table_tmc.
 **********************************************************************
 *** Check if Node is relevant after filtering!
     READ TABLE ir_matches->* WITH KEY node_key = mv_alv_tree_node_tmc ASSIGNING <match>.
@@ -181,7 +182,7 @@ CLASS ZCL_SIMPLE_ENTITY IMPLEMENTATION.
 
 
   METHOD collect_messages.
-    FIELD-SYMBOLS: <messages> TYPE zcl_entity=>tty_string.
+    FIELD-SYMBOLS: <messages> TYPE zcl_value_entity=>tty_string.
     ASSIGN i_messages->* TO <messages>.
     <messages> = VALUE #( BASE <messages> FOR message IN mt_info_messages ( |Nkey: { mv_alv_tree_node_tmc } -- { message }| ) ).
   ENDMETHOD.
